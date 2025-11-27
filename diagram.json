@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "author": "Gonzalo Quedena",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-v1", "id": "esp", "top": -213.92, "left": -62.4, "attrs": {} },
+    { "type": "wokwi-breadboard", "id": "bb", "top": 60, "left": -100, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -124.5, "left": 157.8, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 275.2,
+      "left": -167.2,
+      "attrs": { "pins": "i2c" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": -93.3, "left": 256.6, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 97.6,
+      "left": 177,
+      "rotate": 180,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 42.35,
+      "left": 230.4,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.2", "bb:tn.1", "black", [ "h-28.8", "v149.5" ] ],
+    [ "dht1:VCC", "bb:tp.10", "red", [ "v28.8", "h-76.8", "v53.1" ] ],
+    [ "dht1:GND", "bb:tn.10", "black", [ "v57.6", "h-134.4", "v34.3" ] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v0" ] ],
+    [ "lcd1:VCC", "bb:tp.20", "red", [ "h-48", "v-211.1", "h336", "v-33.3" ] ],
+    [ "lcd1:GND", "bb:tn.20", "black", [ "h-28.8", "v-124.8", "h349.2" ] ],
+    [ "lcd1:SDA", "esp:21", "blue", [ "v0" ] ],
+    [ "lcd1:SCL", "esp:22", "yellow", [ "v0" ] ],
+    [ "gas1:VCC", "bb:tp.30", "red", [ "v85.5", "h-96", "v33.9" ] ],
+    [ "gas1:GND", "bb:tn.30", "black", [ "h48", "v76", "h-115.2", "v63.1" ] ],
+    [ "gas1:A0", "esp:34", "orange", [ "v0" ] ],
+    [ "led1:A", "esp:2", "green", [ "v0" ] ],
+    [ "led1:C", "r1:1", "black", [ "h25.8", "v-34" ] ],
+    [ "r1:2", "bb:tn.40", "black", [ "h123.6", "v34.3" ] ],
+    [ "dht1:SDA", "esp:D4", "green", [ "v19.2", "h-38.3", "v-105.6" ] ],
+    [ "esp:3V3", "bb:tp.1", "red", [ "h18.71", "v86.4", "h-111.6" ] ],
+    [ "gas1:DOUT", "esp:D34", "green", [ "h19.2", "v-163.5", "h-508.8", "v67.2" ] ],
+    [ "led1:A", "esp:D2", "green", [ "h-19.2", "v-76.8", "h-86.4", "v-115.2" ] ]
+  ],
+  "dependencies": {}
+}
