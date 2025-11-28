@@ -26,3 +26,18 @@ String GpsService::getLocationString() {
     return "No Fix";
 }
 
+double GpsService::getLatitude() {
+    if (gps.location.isValid()) {
+        return gps.location.lat();
+    }
+    return 0.0;  // Return 0.0 if no GPS fix
+}
+
+double GpsService::getLongitude() {
+    if (gps.location.isValid()) {
+        return gps.location.lng();
+    }
+    return 0.0;  // Return 0.0 if no GPS fix
+}
+
+

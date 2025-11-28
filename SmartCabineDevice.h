@@ -7,6 +7,7 @@
 #include "Led.h"
 #include "GpsService.h"
 #include "DisplayService.h"
+#include "EdgeServiceClient.h"  // HTTP client for Edge Service
 
 class SmartCabineDevice : public Device {
 private:
@@ -15,8 +16,10 @@ private:
     Led led;
     GpsService gpsService;
     DisplayService display;
+    EdgeServiceClient edgeClient;  // Edge service client
     
     unsigned long lastUpdate;
+    unsigned long lastSend;        // Timestamp for telemetry sending
     bool showGpsPage;
 
 public:
@@ -34,6 +37,9 @@ public:
     // Event IDs
     static const int EVENT_GAS_DETECTED = 20;
     static const int EVENT_AIR_CLEAN = 21;
+
+    // Telemetry Sending Interval
+    static const unsigned long SEND_INTERVAL = 10000;  // Send every 10 seconds
 
     SmartCabineDevice();
 

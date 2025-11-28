@@ -17,6 +17,8 @@ public:
     void update();
     bool isValid();
     String getLocationString();
+    double getLatitude();
+    double getLongitude();
 };
 
 #endif // GPS_SERVICE_H

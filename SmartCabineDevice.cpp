@@ -8,6 +8,7 @@ SmartCabineDevice::SmartCabineDevice()
       gpsService(Serial2, GPS_RX_PIN, GPS_TX_PIN),
       display(LCD_ADDR, LCD_COLS, LCD_ROWS),
       lastUpdate(0),
+      lastSend(0),
       showGpsPage(false) {
 }
 
@@ -21,6 +22,15 @@ void SmartCabineDevice::setup() {
     
     // LED initialized in constructor
     led.setState(false);
+
+    // Connect to WiFi and Edge Service
+    Serial.println("\n=== Connecting to Edge Service ===");
+    if (edgeClient.connectWiFi()) {
+        Serial.println("Ready to send telemetry data!");
+    } else {
+        Serial.println("WARNING: WiFi connection failed. Telemetry will not be sent.");
+        Serial.println("Device will continue operating in offline mode.");
+    }
 
     Serial.println("System Ready.");
 }
@@ -39,7 +49,25 @@ void SmartCabineDevice::update() {
         on(Event(EVENT_AIR_CLEAN));
     }
 
-    // 3. Display Update (Every 2 seconds)
+    // 3. Send Telemetry to Edge Service (Every 10 seconds)
+    if (millis() - lastSend > SEND_INTERVAL) {
+        lastSend = millis();
+        
+        Serial.println("\n========================================");
+        Serial.println("Sending telemetry data...");
+        
+        edgeClient.sendTelemetry(
+            dhtSensor.getTemperature(),
+            dhtSensor.getHumidity(),
+            mq2Sensor.getValue(),
+            gpsService.getLatitude(),
+            gpsService.getLongitude()
+        );
+        
+        Serial.println("========================================\n");
+    }
+
+    // 4. Display Update (Every 2 seconds)
     if (millis() - lastUpdate > 2000) {
         lastUpdate = millis();
         

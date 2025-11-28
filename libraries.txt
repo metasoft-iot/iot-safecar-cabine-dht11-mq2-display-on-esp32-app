@@ -2,4 +2,4 @@ LiquidCrystal I2C
 DHT sensor library
 Adafruit Unified Sensor
 TinyGPSPlus
-
+ArduinoJson
