@@ -5,7 +5,8 @@ DisplayService::DisplayService(uint8_t addr, uint8_t cols, uint8_t rows)
     : lcd(addr, cols, rows) {
 }
 
-void DisplayService::begin() {
+void DisplayService::begin(int sda, int scl) {
+    Wire.begin(sda, scl);
     lcd.init();
     lcd.backlight();
     lcd.setCursor(0, 0);

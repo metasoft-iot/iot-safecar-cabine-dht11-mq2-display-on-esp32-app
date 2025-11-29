@@ -24,15 +24,17 @@ private:
 
 public:
     // Constants for pins
-    static const int DHT_PIN = 4;
-    static const int DHT_TYPE = DHT22;
-    static const int MQ2_PIN = 34;
+    static const int DHT_PIN = 5;
+    static const int DHT_TYPE = DHT11;
+    static const int MQ2_PIN = 23;
     static const int LED_PIN = 2;
     static const int GPS_RX_PIN = 16;
     static const int GPS_TX_PIN = 17;
     static const int LCD_ADDR = 0x27;
     static const int LCD_COLS = 16;
     static const int LCD_ROWS = 2;
+    static const int LCD_SDA = 21;
+    static const int LCD_SCL = 22;
 
     // Event IDs
     static const int EVENT_GAS_DETECTED = 20;

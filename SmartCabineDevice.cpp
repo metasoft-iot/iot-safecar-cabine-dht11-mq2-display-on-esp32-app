@@ -18,7 +18,7 @@ void SmartCabineDevice::setup() {
     dhtSensor.begin();
     mq2Sensor.begin();
     gpsService.begin();
-    display.begin();
+    display.begin(LCD_SDA, LCD_SCL);
     
     // LED initialized in constructor
     led.setState(false);

@@ -10,7 +10,7 @@ private:
 
 public:
     DisplayService(uint8_t addr, uint8_t cols, uint8_t rows);
-    void begin();
+    void begin(int sda, int scl);
     void showStatus(float temp, float hum, String gasStatus, String gpsLoc);
     void showGps(String gpsLoc);
 };
